@@ -15,7 +15,7 @@ const storage= multer.diskStorage({
 const uploads = multer({storage});
 
 const router=Router();
-router.use(authenticateJWT); // A partir de aqui, las demas rutas necesitan autentiacion
+//router.use(authenticateJWT); // A partir de aqui, las demas rutas necesitan autentiacion
 router.get('/productos',getProductos)
 router.get('/productos/:id',getProductoxid)
 router.post('/productos',uploads.single("prod_imagen"),postProductos)
