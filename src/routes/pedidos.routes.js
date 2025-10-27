@@ -10,7 +10,7 @@ import {
 } from "../controladores/pedidosCtrl.js";
 
 const router = Router();
-router.use(authenticateJWT);
+router.use('/pedidos', authenticateJWT);
 router.get("/pedidos", getPedidos);
 router.get("/pedidos/:id", getPedidoById);
 router.post("/pedidos", postPedido);
