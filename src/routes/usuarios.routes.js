@@ -13,7 +13,9 @@ import {
 const router = Router();
 router.post('/login', login);
 router.post("/usuarios", postUsuario);
+
 router.use(authenticateJWT); // a partir de esta lineas, las demás urls necesitarán autenticación
+
 router.get("/usuarios", getUsuarios);
 router.get("/usuarios/:id", getUsuarioById);
 router.put("/usuarios/:id", putUsuario);
