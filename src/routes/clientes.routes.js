@@ -6,7 +6,7 @@ const router = Router();
 
 //armar las rutas "URL"
 
-router.use(authenticateJWT); // A partir de aqui, las demas rutas necesitan autentiacion
+router.use('/clientes',authenticateJWT); // A partir de aqui, las demas rutas necesitan autentiacion
 router.get("/clientes",getCliente);
 router.get("/clientes/:id",getClientexid);
 router.post("/clientes",postClientes);
