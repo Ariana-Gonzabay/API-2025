@@ -138,7 +138,7 @@ export const putProductos = async (req, res) => {
 };
 
 // PATCH parcial
-export const patchProductos = async (req, res) => {
+/* export const patchProductos = async (req, res) => {
   try {
     const { id } = req.params;
     const { prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo } = req.body;
@@ -180,7 +180,55 @@ export const patchProductos = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Error en el servidor' });
   }
+}; */
+export const patchProductos = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo } = req.body;
+
+    // Verificamos si existe el producto
+    const [[productoActual]] = await conmysql.query('SELECT * FROM productos WHERE prod_id = ?', [id]);
+    if (!productoActual) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+
+    // Imagen nueva (opcional)
+    let prod_imagen = productoActual.prod_imagen;
+    if (req.file) {
+      // Guardamos nueva imagen
+      prod_imagen = `/uploads/${req.file.filename}`;
+      // Borramos la vieja si existía
+      if (productoActual.prod_imagen) deleteFile(productoActual.prod_imagen);
+    }
+
+    // Armamos los campos actualizados con preferencia por los nuevos
+    const campos = {
+      prod_codigo: prod_codigo ?? productoActual.prod_codigo,
+      prod_nombre: prod_nombre ?? productoActual.prod_nombre,
+      prod_stock: prod_stock ?? productoActual.prod_stock,
+      prod_precio: prod_precio ?? productoActual.prod_precio,
+      prod_activo: prod_activo ?? productoActual.prod_activo,
+      prod_imagen: prod_imagen
+    };
+
+    // Actualizamos en la base
+    await conmysql.query('UPDATE productos SET ? WHERE prod_id = ?', [campos, id]);
+
+    // Consultamos el producto actualizado
+    const [[updated]] = await conmysql.query('SELECT * FROM productos WHERE prod_id = ?', [id]);
+    updated.prod_imagen = buildImageUrl(req, updated.prod_imagen);
+
+    res.json({
+      message: 'Producto actualizado parcialmente con éxito.',
+      data: updated
+    });
+
+  } catch (error) {
+    console.error('Error en patchProductos:', error);
+    res.status(500).json({ message: 'Error al actualizar producto', error: error.message });
+  }
 };
+
 
 // DELETE
 export const deleteProductosxid = async (req, res) => {
