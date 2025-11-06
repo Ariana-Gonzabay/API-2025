@@ -26,7 +26,14 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Para form-urlencoded
-app.use("/uploads",express.static(path.join(__dirname,"../uploads")));
+/* app.use("/uploads",express.static(path.join(__dirname,"..uploads"))); */
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+/* app.use("/uploads", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+}, express.static(path.join(__dirname, "uploads"))); */
+
+
 
 
 
@@ -40,3 +47,4 @@ app.use((req, res, next) => {
 });
 
 export default app;
+
