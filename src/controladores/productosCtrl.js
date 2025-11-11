@@ -137,50 +137,6 @@ export const putProductos = async (req, res) => {
   }
 };
 
-// PATCH parcial
-/* export const patchProductos = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo } = req.body;
-
-    // Nueva imagen si subieron archivo
-    let prod_imagen = null;
-    if (req.file) {
-      prod_imagen = `/uploads/${req.file.filename}`;
-      // borramos imagen vieja
-      const [[old]] = await conmysql.query('SELECT prod_imagen FROM productos WHERE prod_id = ?', [id]);
-      if (old && old.prod_imagen) deleteFile(old.prod_imagen);
-    }
-
-    const [result] = await conmysql.query(
-      `UPDATE productos
-         SET 
-           prod_codigo = IFNULL(?, prod_codigo),
-           prod_nombre = IFNULL(?, prod_nombre),
-           prod_stock  = IFNULL(?, prod_stock),
-           prod_precio = IFNULL(?, prod_precio),
-           prod_activo = IFNULL(?, prod_activo),
-           ${ prod_imagen !== null ? 'prod_imagen = ?,' : '' }
-           prod_actualizado = NOW()
-       WHERE prod_id = ?`,
-      prod_imagen !== null
-        ? [prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, prod_imagen, id]
-        : [prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, id]
-    );
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'Producto no encontrado' });
-    }
-
-    const [[updated]] = await conmysql.query('SELECT * FROM productos WHERE prod_id = ?', [id]);
-    updated.prod_imagen = buildImageUrl(req, updated.prod_imagen);
-    res.json(updated);
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error en el servidor' });
-  }
-}; */
 export const patchProductos = async (req, res) => {
   try {
     const { id } = req.params;
