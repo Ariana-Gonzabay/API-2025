@@ -1,4 +1,4 @@
-
+/* 
 import { authenticateJWT } from '../auth.js';
 import { Router } from "express";
 import {
@@ -20,3 +20,4 @@ router.patch("/pedidos_detalle/:id", patchDetalle);
 router.delete("/pedidos_detalle/:id", deleteDetalle);
 export default router;
  
+ */
