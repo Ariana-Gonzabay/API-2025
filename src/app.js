@@ -39,7 +39,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api", clientesRoutes);
 app.use("/api", pedidosRoutes);
-/* app.use("/api", pedidosDetalleRoutes); */
+app.use("/api", pedidosDetalleRoutes);
 app.use("/api", usuariosRoutes);
 app.use("/api", productosRoutes);
 app.use((req, res, next) => {
