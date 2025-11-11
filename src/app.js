@@ -6,7 +6,9 @@ import { fileURLToPath } from "url";
 
 import clientesRoutes from "./routes/clientes.routes.js";
 import pedidosRoutes from "./routes/pedidos.routes.js";
-import pedidosDetalleRoutes from "./routes/pedidosDetalle.routes.js";
+/* import pedidosDetalleRoutes from "./routes/pedidosDetalle.routes.js"; */
+
+
 import usuariosRoutes from "./routes/usuarios.routes.js";
 import productosRoutes from "./routes/productos.routes.js"
 
@@ -39,7 +41,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api", clientesRoutes);
 app.use("/api", pedidosRoutes);
-app.use("/api", pedidosDetalleRoutes);
+/* app.use("/api", pedidosDetalleRoutes); */
 app.use("/api", usuariosRoutes);
 app.use("/api", productosRoutes);
 app.use((req, res, next) => {
