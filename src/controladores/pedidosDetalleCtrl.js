@@ -1,4 +1,4 @@
-import { conmysql } from "../bd.js";
+/* import { conmysql } from "../bd.js";
 
 export const getDetalles = async (req, res) => {
   try {
@@ -87,4 +87,4 @@ export const deleteDetalle = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: "Error en el servidor" });
   }
-}; 
+};  */
