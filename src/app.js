@@ -7,10 +7,10 @@ import { fileURLToPath } from "url";
 import clientesRoutes from "./routes/clientes.routes.js";
 import pedidosRoutes from "./routes/pedidos.routes.js";
 /* import pedidosDetalleRoutes from "./routes/pedidosDetalle.routes.js";  */
-
-
 import usuariosRoutes from "./routes/usuarios.routes.js";
 import productosRoutes from "./routes/productos.routes.js"
+import categoriasRoutes from "./routes/categorias.routes.js";
+
 
 //definir los módulos de entrada
 const __filename=fileURLToPath(import.meta.url);
@@ -44,6 +44,8 @@ app.use("/api", pedidosRoutes);
 /* app.use("/api", pedidosDetalleRoutes);  */
 app.use("/api", usuariosRoutes);
 app.use("/api", productosRoutes);
+app.use("/api", categoriasRoutes);
+
 app.use((req, res, next) => {
   res.status(404).json({ message: "hola :), seamos felices"  });
 });
